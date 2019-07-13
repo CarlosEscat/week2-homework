@@ -1,4 +1,5 @@
 const groupAdultsByAgeRange = (people) => {
+    const sorted = people.filter((person)=> person.age > 18)
     if (people.length === 0){
         return people = {}
     }
@@ -10,18 +11,30 @@ const groupAdultsByAgeRange = (people) => {
     //     "51 and older": []
     // }
 
-    
-
-    const sorted = people.filter((person)=> person.age > 18)
-
     const one = sorted.filter((person) => person.age <=20)
     const two = sorted.filter((person) => person.age >20 && person.age <=30)
     const three = sorted.filter((person) => person.age >30 && person.age <=40)
     const four = sorted.filter((person) => person.age >40 && person.age <=50)
     const five = sorted.filter((person) => person.age >50)
-    const result = {"20 and younger": [one], "21-30": [two], "31-40": [three], "41-50": [four], "51 and older": [five]}
-    
+    //const result = {"20 and younger": [one], "21-30": [two], "31-40": [three], "41-50": [four], "51 and older": [five]}
+    const result = {}
 
+     if (one.length > 0){
+        result = result{'20 and younger': one}
+    }
+    if (two.length > 0){
+        result.push({'21-30': two})
+    }
+    if (three.length > 0){
+        result.push({'31-40': three})
+    }
+    if (four.length > 0){
+        result.push({'41-50': four})
+    }
+    if (five.length > 0){
+        result.push({'51 and older': five})
+    }
+    
     // const sorted = groupedOver18.reduce((older, currentPerson) => {
     //     if(older.length) {
     //         var temp = [];
@@ -45,6 +58,13 @@ const groupAdultsByAgeRange = (people) => {
     // result["41-50"] = sorted.filter((person) => person.age >40 && person.age <= 50)
     // result["51 and older"] = sorted.filter((person) => person.age > 50)
 
+    // result = result.filter((person) => {
+    //     return result.reduce((noValue, currentPerson) => {
+    //         if (currentPerson){
+    //             return noValue
+    //         }
+    //     },0)
+    // })
     // if (result["20 and younger"]===[]){
     //     delete result["20 and younger"]
     // }
